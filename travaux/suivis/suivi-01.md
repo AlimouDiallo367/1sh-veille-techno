@@ -55,7 +55,7 @@ L'objectif de ce suivi est de démontrer le travail de recherche ainsi que la pr
 
 [6] LocalAI Project, « LocalAI: The free, Open Source OpenAI alternative », LocalAI. [En ligne]. Disponible sur : https://localai.io/. (Écarté : alternative délaissée au profit d'Ollama pour la simplicité de gestion via Modelfiles).
 
-[7] Wikipédia, « Fine-tuning (deep learning) », Wikipedia, The Free Encyclopedia. [En ligne]. Disponible sur : https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning). (Écarté : processus figé et matériellement inaccessible avec les 8 Go de VRAM de la RTX 4060).
+[7] Wikipédia, « Fine-tuning (deep learning) », Wikipedia, The Free Encyclopedia. [En ligne]. Disponible sur : https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning). (Écarté : processus figé et matériellement inaccessible avec les 8 Go de VRAM de ma RTX 4060).
 
 [8] T. Dero, « ExLlamaV2: An optimized inference engine for LLaMA models », GitHub. [En ligne]. Disponible sur : https://github.com/turboderp/exllamav2. (Écarté : requiert des configurations de dépendances trop strictes sous Linux par rapport à l'agilité d'Ollama).
 
