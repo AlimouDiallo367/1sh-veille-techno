@@ -16,10 +16,10 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 - [x] gcc, build-essential, ssh
 - [x] docker
 - [x] apache2, passenger, nginx (conteneur nginx)
-- [] node/nvm 
-- [] rust, rustop, starship, cargo
+- [ ] node/nvm 
+- [ ] rust, rustop, starship, cargo
 
-> *Note: Cet sera éventuellement automatisé via un dépôt dotfiles (25 mai 2026).* 
+> *Note: Cet environnement sera éventuellement automatisé via un dépôt dotfiles (25 mai 2026).* 
 
 ## 2. Docker, Ollama, LLM et Open WebUI
 - [x] Suivi 01 avec Nick - Document des liens pour effectuer le travail 
@@ -39,7 +39,17 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 - [x] Identification des risques de sécurité et cas limites ([Voir analyses](#enjeux-et-risques))
 - [x] Déploiement d'un conteneur Nginx et configuration des certificats SSL
 - [x] Contournement du blocage réseau localhost via utilitaires tiers pour le PoC (`localtunnel` / `ngrok`)
+- [x] Mise à jour planification 
+- [x] Préparation Suivi 02 - Struture du document et un peu de contenu  
 - [ ] Résolution du problème d'accès réseau direct hors localhost (investigation pare-feu Windows et règles de routage)
+
+> *Chronologie : Vendredi 29 mai (reverse proxy, rédaction doc/proc) et Lundi 01 juin (RAG).*
+> *Note : je demanderai peut être d'avoir accès à la doc interne du dept pour le RAG ou sinon j'utiliserai de la doc perso pour alimenter mon RAG*
+
+--- 
+
+## 4. Retrieval-Augmented Generation
+-  
 
 ---
 
