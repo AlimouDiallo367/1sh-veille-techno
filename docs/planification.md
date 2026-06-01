@@ -10,7 +10,7 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 - [x] zsh (uniquement installé, shell par défaut: bash)
 - [x] curl
 - [x] wget
-- [x] tmux 
+- [x] tmux, tree
 - [x] vim/nvim
 - [x] ruby/rbenv/ruby-build
 - [x] gcc, build-essential, ssh
@@ -49,7 +49,14 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 --- 
 
 ## 4. Retrieval-Augmented Generation
--  
+- [ ] Mise en place du RAG
+- [ ] Essaie avec document personnel vs document cégep?! (documentation onenote vs livre de code?)
+- [ ] Choix probable Rust Book, Ruby lang, Github Nicolas (robotique), site web James, Cppreference
+- [ ] 
+
+## 5. Intégration environnement NeoVim 
+
+## 6. MCP GLPI ou autre??? 
 
 ---
 
