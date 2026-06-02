@@ -20,6 +20,7 @@ Vue d'ensemble du projet *(Le "Quoi" et le "Pourquoi")*
 - [ ] À rédiger : Présenter le but d'AiBarr : offrir la même réactivité qu'un outil cloud, mais de manière souveraine, sur du matériel standard et sans fuite de données. dans explication des fonctionnalités]
 
 ### 2.2 Architecture 
+- [ ] À rédiger : Parler rapidement de la pile actuelle de mon déploiement (Windows - WSL - Docker)
 - [ ] À rédiger : Décrire l'approche par micro-services conteneurisés avec Docker.
 - [ ] À rédiger : Schématiser ou expliquer le flux de données général entre les trois grands piliers : le moteur d'inférence, l'interface utilisateur sécurisée par un proxy inversé (Nginx) et le moteur de contexte.
 
@@ -38,6 +39,8 @@ Technique *(Le "Comment")*
     - Embeddings : Traduction sémantique du texte en coordonnées mathématiques.
     - Vector DB (Chroma DB) : Stockage et recherche instantanée par similarité.
     - Context Window & System Prompt : La mémoire à court terme allouée et les directives de comportement données à l'IA.
+
+> *Note : rédiriger vers rag.md pour plus de détails*
 
 ### 3.3 Mon écosystème de travail : NeoVim et MCP GLPI 
 - [ ] À rédiger : Présenter NeoVim comme l'éditeur minimaliste et performant (configurable en Lua) pour intégrer l'IA directement dans le terminal de travail.

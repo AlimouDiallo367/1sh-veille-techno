@@ -6,7 +6,7 @@ Ce document repertorie mon avancement durant ces 2 semaines.
 ## 1. Setup environnement de base linux (WSL vs Physique)
 Mise en place de l'environnement système avec l'installation et la configuration des outils suivants :
 - [x] Installation et configuration de Git
-- [x] mysql/mariadb
+- [x] mysql/mariadb, sqlite3
 - [x] zsh (uniquement installé, shell par défaut: bash)
 - [x] curl
 - [x] wget
@@ -16,8 +16,8 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 - [x] gcc, build-essential, ssh
 - [x] docker
 - [x] apache2, passenger, nginx (conteneur nginx)
-- [ ] node/nvm 
-- [ ] rust, rustop, starship, cargo
+- [x] node/nvm 
+- [x] rust, rustop, starship, cargo
 
 > *Note: Cet environnement sera éventuellement automatisé via un dépôt dotfiles (25 mai 2026).* 
 
@@ -49,12 +49,16 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 --- 
 
 ## 4. Retrieval-Augmented Generation
-- [ ] Mise en place du RAG
-- [ ] Essaie avec document personnel vs document cégep?! (documentation onenote vs livre de code?)
-- [ ] Choix probable Rust Book, Ruby lang, Github Nicolas (robotique), site web James, Cppreference
-- [ ] 
+- [x] Mise en place du RAG
+- [x] Essaie avec document personnel vs document cégep?! (documentation onenote vs livre de code?)
+- [x] Choix probable Rust Book, Ruby lang, Github Nicolas (robotique), site web James, Cppreference
+- [x] Bonus, mise en place de Kokoro API  
+- [ ] Faire plus de tests avec le RAG pour l'affiner avec Open WebUI 
+
+> *Open WebUI prend le contrôle, découpe tes fichiers en morceaux, calcule les embeddings et peuple son instance ChromaDB locale. Tu vas voir une icône de chargement tourner pendant qu'il indexe le tout. Aussi, pour les tests avec le cours de robotique de Nick j'ai du ajuster les paramètres chunks et top K (1000 à 500 et 3 à 5)* 
 
 ## 5. Intégration environnement NeoVim 
+- [ ] CodeCompanion 
 
 ## 6. MCP GLPI ou autre??? 
 
