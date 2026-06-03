@@ -46,6 +46,10 @@ Technique *(Le "Comment")*
 - [ ] À rédiger : Présenter NeoVim comme l'éditeur minimaliste et performant (configurable en Lua) pour intégrer l'IA directement dans le terminal de travail.
 - [ ] À rédiger : Expliquer le protocole MCP (Model Context Protocol) et comment il permet de lier l'IA locale à des outils externes de gestion d'infrastructure comme GLPI pour aider le technicien en direct.
 
+> *Note : plugin CodeCompanion, expliquer les différents mode de fonctionnement, chat, inline et agentique. Peut être rédiriger vers une page mcp.md ou neovim.md ou autre*
+
+### 3.4 Bonus : Intégration TTS et Web Search (Kokoro-TTS, Opheus-TTS) 
+
 ## 4. Conclusion 
 - [ ] À rédiger : Synthèse 
 

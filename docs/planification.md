@@ -55,12 +55,15 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 - [x] Bonus, mise en place de Kokoro API  
 - [ ] Faire plus de tests avec le RAG pour l'affiner avec Open WebUI 
 
+
+> *Chronologie : lundi 01 juin (reverse proxy, rédaction doc/proc, rag, base de connaissance 1sx).*
 > *Open WebUI prend le contrôle, découpe tes fichiers en morceaux, calcule les embeddings et peuple son instance ChromaDB locale. Tu vas voir une icône de chargement tourner pendant qu'il indexe le tout. Aussi, pour les tests avec le cours de robotique de Nick j'ai du ajuster les paramètres chunks et top K (1000 à 500 et 3 à 5)* 
 
+--- 
 ## 5. Intégration environnement NeoVim 
-- [ ] CodeCompanion 
+- [x] CodeCompanion 
 
-## 6. MCP GLPI ou autre??? 
+## 6. Intégration VS Code + Mode agentique??? 
 
 ---
 
