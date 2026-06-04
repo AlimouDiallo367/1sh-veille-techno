@@ -53,7 +53,8 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 - [x] Essaie avec document personnel vs document cégep?! (documentation onenote vs livre de code?)
 - [x] Choix probable Rust Book, Ruby lang, Github Nicolas (robotique), site web James, Cppreference
 - [x] Bonus, mise en place de Kokoro API  
-- [ ] Faire plus de tests avec le RAG pour l'affiner avec Open WebUI 
+- [x] Bonus, mise en place de Opheus-TTS  
+- [x] Faire plus de tests avec le RAG pour l'affiner avec Open WebUI 
 
 
 > *Chronologie : lundi 01 juin (reverse proxy, rédaction doc/proc, rag, base de connaissance 1sx).*
@@ -63,7 +64,7 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 ## 5. Intégration environnement NeoVim 
 - [x] CodeCompanion 
 
-## 6. Intégration VS Code + Mode agentique??? 
+## 6. Automatisation déploiement Docker Compose / Bash 
 
 ---
 

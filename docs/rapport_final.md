@@ -49,6 +49,7 @@ Technique *(Le "Comment")*
 > *Note : plugin CodeCompanion, expliquer les différents mode de fonctionnement, chat, inline et agentique. Peut être rédiriger vers une page mcp.md ou neovim.md ou autre*
 
 ### 3.4 Bonus : Intégration TTS et Web Search (Kokoro-TTS, Opheus-TTS) 
+- Dire que Kokoro-TTS fonctionne bien, j'ai exploré d'autres modèles de son comme Opheus-TTS et Chatbox
 
 ## 4. Conclusion 
 - [ ] À rédiger : Synthèse 

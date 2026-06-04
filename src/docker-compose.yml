@@ -1,0 +1,52 @@
+services:
+  aibarr-ollama:
+    image: ollama/ollama:latest
+    container_name: aibarr-ollama
+    ports:
+      - "12367:11434"
+    volumes:
+      - aibarr_ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: "no"
+
+  aibarr-ui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: aibarr-ui
+    ports:
+      - "1367:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:12367
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - aibarr_webui_data:/app/backend/data
+    restart: unless-stopped
+
+  aibarr-kokoro:
+    image: ghcr.io/remsky/kokoro-fastapi-gpu:latest
+    container_name: aibarr-kokoro
+    ports:
+      - "8880:8880"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+
+volumes:
+  aibarr_ollama_data:
+    external: true
+  aibarr_webui_data:
+    external: true
+
+# Pour un déploiement from scratch, remplacer "external: true" par:
+# name: aibarr_ollama_data
