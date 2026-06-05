@@ -7,7 +7,6 @@
 
 --- 
 
-# Annexes et Livrables
+# Travaux et Suivis
 - [Proposition Formelle](pf_thierno_diallo.md)
 - [Documents de références](suivi01.md)
-- [Visualiser la Mindmap (PDF)](assets/aibarr_mindmap.pdf)
