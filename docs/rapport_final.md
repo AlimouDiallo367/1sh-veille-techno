@@ -15,7 +15,7 @@ C’est là qu'en s'appuyant sur des technologies open-source existantes, le pro
 ### 2.1 Objectifs et philosphie du projet 
 Le projet **AiBarr** repose sur une approche claire : le local-first, le no-cloud et le minimalisme technique. L'objectif fondamental consiste à prouver que nous pouvons exploiter la puissance des modèles de langage actuels sans dépendre d'infrastructures distantes. Alors que la majorité des solutions du marché exigent d'envoyer nos données d'infrastructure et notre code source sur des plateformes externes, AiBarr confine l'ensemble des traitements sur la machine de l'utilisateur. C'est une alternative concrète et souveraine face aux abonnements payants imposés par les géants du secteur comme ChatGPT, Gemini ou Claude.
 
-Le but recherché est d'obtenir une fluidité et une pertinence de réponse identiques aux outils cloud, mais de manière totalement autonome et gratuite après le téléchargement des modèles. Le minimalisme du projet s'exprime également dans le refus de réinventer la roue en créant une nouvelle interface utilisateur graphique à partir de zéro, ce qui alourdirait inutilement le système. J'ai plutôt choisi d'intégrer *Open WebUI*, un projet existant que je juge extrêmement bien conçu, fluide et mature. Cela permet de concentrer la totalité des ressources de calcul de la machine sur ce qui importe vraiment : l'inférence brute et la gestion locale des données.
+Le but recherché est d'obtenir une fluidité et une pertinence de réponse identiques aux outils cloud, mais de manière totalement autonome et gratuite après le téléchargement des modèles. Le minimalisme du projet s'exprime également dans le refus de réinventer la roue en créant une nouvelle interface utilisateur graphique à partir de zéro, ce qui alourdirait inutilement le système. J'ai plutôt choisi d'intégrer *Open WebUI*, un projet existant que je juge très bien fait, fluide et mature. Cela permet de concentrer la totalité des ressources de calcul de la machine sur ce qui importe vraiment : l'inférence brute et la gestion locale des données.
 
 ### 2.2 Architecture (Windows - WSL - Docker) 
 Pour bâtir ce prototype, la pile technologique a été sélectionnée pour maximiser la productivité et l'efficacité opérationnelle :
@@ -23,9 +23,9 @@ Pour bâtir ce prototype, la pile technologique a été sélectionnée pour maxi
 * **L'orchestration par micro-services (Docker & Docker Compose)** : Au lieu de tout installer directement sur le système au risque de corrompre l'environnement ou de saturer les dépendances, l'application est découpée en services isolés dans des conteneurs distincts.
 
 J'ai volontairement choisi de séparer le moteur d'inférence (Ollama) et l'interface utilisateur graphique (Open WebUI) dans des conteneurs différents pour trois raisons majeures :
-- La modularité et la maintenance : Si nous devons mettre à jour l'interface utilisateur ou modifier sa configuration, le moteur d'inférence reste intact en arrière-plan et continue de faire tourner les modèles sans interruption.
-- La gestion des ressources : Le conteneur Ollama nécessite des privilèges d'accès stricts au GPU, tandis que l'interface graphique n'a besoin que de ressources CPU et réseau standards. Isoler les composants évite les conflits de configuration.
-- L'évolution vers l'automatisation : Bien que les premiers tests du prototype aient été lancés à l'aide de commandes manuelles (docker run), cette séparation a été pensée dès le départ pour industrialiser le déploiement via Docker Compose. En centralisant l'infrastructure dans un seul fichier de configuration docker-compose.yml, le projet devient une solution "clés en main". N'importe quel autre développeur ou administrateur système peut récupérer le projet et démarrer l'écosystème complet en une seule ligne de commande, assurant ainsi la portabilité réelle de la solution.
+1. La modularité et la maintenance : Si nous devons mettre à jour l'interface utilisateur ou modifier sa configuration, le moteur d'inférence reste intact en arrière-plan et continue de faire tourner les modèles sans interruption.
+2. La gestion des ressources : Le conteneur Ollama nécessite des privilèges d'accès stricts au GPU, tandis que l'interface graphique n'a besoin que de ressources CPU et réseau standards. Isoler les composants évite les conflits de configuration.
+3. L'évolution vers l'automatisation : Bien que les premiers tests du prototype aient été lancés à l'aide de commandes manuelles (docker run), cette séparation a été pensée dès le départ pour industrialiser le déploiement via Docker Compose. En centralisant l'infrastructure dans un seul fichier de configuration docker-compose.yml, le projet devient une solution "clés en main". N'importe quel autre développeur ou administrateur système peut récupérer le projet et démarrer l'écosystème complet en une seule ligne de commande, assurant ainsi la portabilité réelle de la solution.
 
 > *Note : Sur le plan de la connectivité, l'infrastructure d'AiBarr est configurée de manière étanche et n'est accessible qu'en boucle locale via localhost, l'interface d'Open WebUI répondant sur mon port personnalisé 1367. Dans le but de tester la flexibilité du système et de valider l'ouverture du projet pour d'éventuelles démonstrations, j'ai mené des expérimentations concrètes en laboratoire. J'ai notamment tenté de lier mon environnement local à une machine virtuelle externe hébergée sur MonkeyRank à l'aide d'une liaison SSH, en plus d'explorer l'utilisation d'un utilitaire de tunnel public comme localtunnel.*
 
@@ -33,12 +33,20 @@ J'ai volontairement choisi de séparer le moteur d'inférence (Ollama) et l'inte
 
 ## 3. Explication des fonctionnalités 
 ### 3.1 Le moteur de langage : LLM et Ollama 
-- [ ] À rédiger : Définir ce qu'est un LLM (Large Language Model) et justifier l'importance des modèles open-source (auditabilité, contrôle des poids). Mentionner le choix de Llama 3 et DeepSeek-Coder.
-- [ ] À rédiger : Expliquer la signification des paramètres (7B / 8B) et pourquoi ils représentent le compromis idéal (sweet spot) pour la mémoire vive (RAM/VRAM) d'une machine locale.
-- [ ] À rédiger : Présenter Ollama comme le moteur d'exécution en Go qui gère les modèles et expose l'API locale.
+Pour faire fonctionner AiBarr sans dépendre d'une connexion Internet, le système s'appuie sur un LLM (Large Language Model). Un LLM est un modèle statistique entraîné à prédire et générer du texte de manière cohérente en fonction d'un contexte fourni. Plutôt que d'utiliser les API fermées des géants du web, j'ai choisi de basculer exclusivement sur des modèles open-source. Cela nous permet entre autre de contrôle les poids du modèle*, nous permet d'auditer le comportement du système et élimine par définition toute exfiltration ou fuite de données.
+
+Mon infrastructure compte actuellement quatre modèles installés:
+- LLama3:latest (8B)
+- Gemma4:latest (8B)
+- Qwen2.5:latest (7.6B)
+- DeepSeek-Coder:latest (1B)
+
+Le « B » associé à ces modèles signifie Billion (milliard de paramètres). Les paramètres représentent le nombre de variables internes que le modèle utilise pour formuler ses réponses. Plus ce chiffre est élevé, plus le modèle possède une capacité de réflexion fine, mais plus il est lourd à charger. Sur ma machine dotée de 8 Go de VRAM (mémoire vidéo dédiée de la carte graphique), les modèles de l'ordre de 7B ou 8B représentent le compromis idéal. L'exécution globale est fluide et tout à fait correcte pour la majorité de ma pile, à l'exception notable de Gemma 4 qui s'avère un peu plus lourd et long à répondre lors des phases d'inférence.
+
+Pour orchestrer ces fichiers de modèles, l'infrastructure utilise **Ollama**. Développé en Go, Ollama agit comme un moteur d'exécution léger qui gère l'arrière-plan technique de l'inférence. C'est lui qui prend le fichier brut du modèle, le charge proprement dans la VRAM de la carte graphique et gère la puissance de calcul requise pour générer le texte en temps réel. Il me permet de télécharger et de basculer d'un modèle à l'autre en une seule ligne de commande, tout en exposant une API locale sécurisée avec laquelle mon interface graphique (Open WebUI) et mes outils de développement peuvent communiquer directement en tâche de fond.
 
 ### 3.2 L'injection de contexte : Le RAG 
-Bien qu'un LLM soit performant, il ne possède aucune connaissance de mes fichiers locaux ou de mes documentations internes, et il a tendance à « halluciner » (inventer des faits erronés avec beaucoup d'assurance) si ses données d'entraînement font défaut. Pour régler ce problème, AiBarr intègre le mécanisme de RAG (Retrieval-Augmented Generation).
+Bien qu'un LLM soit performant, il ne possède aucune connaissance de mes fichiers locaux ou de mes documentations internes, et il a tendance à « halluciner » (inventer des faits erronés avec beaucoup d'assurance) si ses données d'entraînement font défaut. Pour régler ce problème, AiBarr intègre le mécanisme de *RAG*.
 
 Le RAG consiste à intercepter ma question, à chercher les extraits correspondants dans une documentation locale de référence, puis à injecter ces extraits directement dans la mémoire à court terme du LLM pour qu’il formule une réponse exacte et vérifiable. Ce processus repose sur trois concepts clés :court terme allouée et les directives de comportement données à l'IA.
 
