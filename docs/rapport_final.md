@@ -57,22 +57,65 @@ Le RAG consiste à intercepter ma question, à chercher les extraits corresponda
 > *Note : Pour une analyse exhaustive de la plomberie mathématique et de l'indexation de la base de données vectorielle, veuillez vous référer au fichier d'ingénierie [rag.md](rag.md). Le suivi de sa mise en place et les chronologies de mes laboratoires sont documentés dans le fichier [planification.md](planification.md).*
 
 ### 3.3 Mon écosystème de travail : NeoVim  
-- [ ] À rédiger : Présenter NeoVim comme l'éditeur minimaliste et performant (configurable en Lua) pour intégrer l'IA directement dans le terminal de travail.
+L'objectif ultime d'AiBarr est de s'intégrer de manière transparente directement là où j'écris mon code, sans m'obliger à ouvrir un navigateur web. C'est pourquoi j'ai connecté mon infrastructure locale à **NeoVim**, un éditeur de texte ultra-minimaliste basé sur le terminal et entièrement configurable en langage Lua.
 
-> *Note : plugin CodeCompanion, expliquer les différents mode de fonctionnement, chat, inline et agentique. Peut être rédiriger vers une page mcp.md ou neovim.md ou autre*
+Pour faire le pont avec mes LLM locaux, j'utilise le plugin **CodeCompanion**. Bien que les outils cloud des géants (comme GitHub Copilot) proposent des fonctionnalités similaires via des abonnements payants, CodeCompanion me permet d'obtenir ces comportements gratuitement et localement selon trois modes de fonctionnement distincts :
+
+- **Le mode Chat (avec Qwen 2.5)** : C'est l'équivalent d'avoir un collègue à qui on pose des questions sur une chaise d'à côté. Une interface de discussion s'ouvre sur le côté pour concevoir l'architecture d'un script ou comprendre un concept. J'ai choisi Qwen 2.5 (7.6B) pour ce mode en raison de ses excellentes capacités de raisonnement général et de sa fluidité conversationnelle.
+- **Le mode Inline (avec DeepSeek-Coder)** : C'est l'équivalent d'un correcteur automatique qui réécrit directement sur notre feuille. On sélectionne un bloc de code et le modèle le modifie ou l'optimise directement à l'emplacement du curseur. Pour cette tâche précise, j'ai configuré le modèle spécialisé DeepSeek-Coder (1B). Sa légèreté extrême lui permet de s'exécuter instantanément en arrière-plan sans bloquer mon éditeur de texte pendant que je tape.
+- **Le mode Agentique** : C'est l'équivalent d'un assistant stagiaire à qui on donne une consigne et qui va fouiller lui-même dans les dossiers. Le modèle reçoit une directive et enchaîne de manière autonome des actions complexes (lire un fichier, exécuter un outil technique, analyser les erreurs) pour résoudre le problème.
+
+> *Note : Si les modes Chat et Inline répondent parfaitement à mes besoins quotidiens, le mode agentique local n'a pas été pleinement fonctionnel lors de mes tests.*
 
 ### 3.4 Bonus : Intégration TTS et Web Search (Kokoro-TTS, Opheus-TTS) 
-- Dire que Kokoro-TTS fonctionne bien, j'ai exploré d'autres modèles de son comme Opheus-TTS et Chatbox
+Au-delà du texte brut, j'ai profité de la modularité d'Open WebUI pour explorer la dimension sonore de l'IA locale. J'ai intégré avec succès Kokoro-TTS, un modèle open-source de synthèse vocale (Text-to-Speech) ultra-léger. Ce module fonctionne parfaitement sur ma machine et me permet de faire lire à haute voix les réponses générées par mes assistants locaux.
+
+Dans cette même démarche de veille, j'ai également exploré d'autres alternatives comme le modèle Orpheus-TTS, XTTS V2 et Chatterbox TTS. Bien que ces derniers outils n'aient pas été retenus pour le cœur de mon infrastructure finale en raison de leur consommation de ressources matérielles, ces manipulations m'ont permis de mieux évaluer les compromis actuels entre la qualité de restitution et l'empreinte mémoire sur une configuration locale.
 
 ## 4. Conclusion 
-- [ ] À rédiger : Synthèse 
+Ce rapport de veille technologique autour du projet AiBarr démontre qu'en 2026, l'autonomie et la souveraineté numérique sont tout à fait accessibles pour un professionnel de l'informatique. En agençant des technologies matures comme Docker, Ollama et Open WebUI, j'ai prouvé qu'il est viable de déployer une infrastructure d'intelligence artificielle performante, gratuite et entièrement coupée du réseau extérieur, le tout sur un poste de travail standard (avec une carte graphique idéalement).
+
+Les défis de routage réseau rencontrés sous WSL 2 pour l'ouverture hors de mon localhost (notamment mes tests de liaison SSH vers ma machine virtuelle MonkeyRank et l'usage de localtunnel) m'ont forcé à faire des compromis. Cependant, ils confortent la philosophie d'étanchéité stricte du projet. Ce projet pose les bases solides d'un écosystème local-first. 
+
+Les prochaines étapes logiques de ma démarche consisteront à automatiser complètement le setup de mes outils via mon dépôt de configurations (dotfiles) et à lier mon infrastructure d'IA locale au système de gestion de parc informatique (GLPI) de l'organisation. L'ouverture vers le protocole MCP (Model Context Protocol) permettra ainsi d'assister la gestion des tickets et des infrastructures de manière totalement sécurisée au sein du Cégep, sans qu'aucune donnée technique sensible ne sorte du réseau local.
 
 ## 5. Référence / Médiagraphie
-- [RGPD](https://fr.wikipedia.org/wiki/R%C3%A8glement_g%C3%A9n%C3%A9ral_sur_la_protection_des_donn%C3%A9es)
-- [Loi 25 - Québec](https://www.quebec.ca/nouvelles/actualites/details/loi-25-nouvelles-dispositions-protegeant-la-vie-privee-des-quebecois-certaines-dispositions-entrent-en-vigueur-aujourdhui-43212)
-- [Loi 25 - Legis Québec](https://www.legisquebec.gouv.qc.ca/fr/document/lc/P-39.1)
-- [NIST](https://www.nist.gov/)
-- [Autre liens à ajouter ici]()
+### Lois, cadres légaux et normes de protection
+[1] Wikipédia, « Règlement général sur la protection des données », Wikipedia, L'encyclopédie libre, 2026. [En ligne]. Disponible sur : https://fr.wikipedia.org/wiki/R%C3%A8glement_g%C3%A9n%C3%A9ral_sur_la_protection_des_donn%C3%A9es. (Consulté pour l'analyse des contraintes de confidentialité européennes).
+[2] Gouvernement du Québec, « Loi 25 - Nouvelles dispositions protégeant la vie privée des Québécois », Portail Québec, 2023. [En ligne]. Disponible sur : [lien suspect supprimé]. (Étudié pour la conformité et l'alignement réglementaire d'AiBarr).
+[3] Publications du Québec, « Loi sur la protection des renseignements personnels dans le secteur privé (RLRQ, c. P-39.1) », LégisQuébec, 2026. [En ligne]. Disponible sur : https://www.legisquebec.gouv.qc.ca/fr/document/lc/P-39.1. (Référence juridique principale pour la souveraineté des données locales).
+[4] National Institute of Standards and Technology, « NIST Cybersecurity Framework (CSF) », U.S. Department of Commerce, 2024. [En ligne]. Disponible sur : https://www.nist.gov/. (Consulté pour la modélisation des risques liés aux flux cloud).
 
-> 2 à 3 Pages Max excluant les pages structurelles!!! Support visuel à ajouter
+### Moteurs et infrastructures logicielles (Sources techniques)
+[5] Ollama Team, « Ollama: Get up and running with large language models locally », GitHub, 2026. [En ligne]. Disponible sur : https://github.com/ollama/ollama. (Moteur d'inférence principal retenu pour le projet).
+[6] G. Gerganov, « Llama.cpp: Inference of LLaMA model in pure C/C++ », GitHub, 2026. [En ligne]. Disponible sur : https://github.com/ggerganov/llama.cpp. (Étudié pour le backend de quantification des fichiers de modèles GGUF).
+[7] Docker Hub, « Docker Compose Documentation », Docker Docs, 2026. [En ligne]. Disponible sur : https://docs.docker.com/compose/. (Référence technique exploitée pour l'orchestration et la portabilité de l'infrastructure).
+[8] Linux Containers, « Incus: Community-driven system container management », LinuxContainers Project, 2026. [En ligne]. Disponible sur : https://linuxcontainers.org/incus/. (Analysé comme alternative d'isolation système au niveau du noyau).
+Interfaces et intégrations de workflow
+[9] Open WebUI Team, « Open WebUI Documentation », Open WebUI, 2026. [En ligne]. Disponible sur : https://docs.openwebui.com/. (Interface graphique retenue pour sa fluidité et sa légèreté matérielle).
+[10] OpenClaw Project, « OpenClaw: Open Source Agentic Orchestration Framework », OpenClaw AI, 2025. [En ligne]. Disponible sur : https://openclaw.ai/. (Exploré pour l'intégration de structures agentiques en circuit fermé).
+[11] T. A. Diallo, « AlimouNvim: Ma configuration personnalisée de NeoVim en langage Lua », GitHub, 2026. [En ligne]. Disponible sur : https://github.com/AlimouDiallo367/AlimouNvim. (Dépôt personnel de configuration de l'éditeur de texte pour l'intégration de CodeCompanion).
 
+### Modèles de langage expérimentés
+[12] Meta AI, « Meta Llama 3: The next generation of open source large language models », Meta Llama, 2024. [En ligne]. Disponible sur : https://www.llama.com/models/llama-3/. (Modèle de base 8B exploité pour le raisonnement généraliste).
+[13] Google DeepMind, « Gemma 4: Open, lightweight models built from the same research and technology used to create Gemini », Google DeepMind, 2025. [En ligne]. Disponible sur : https://deepmind.google/models/gemma/gemma-4/. (Modèle 8B testé localement et évalué pour son empreinte sur la VRAM).
+[14] Mistral AI Team, « Mistral AI Models Overview », Mistral AI Documentation, 2024. [En ligne]. Disponible sur : https://docs.mistral.ai/models/. (Consulté pour la veille sur les petits modèles ouverts).
+[15] DeepSeek AI, « DeepSeek-Coder-V2: Breaking the barrier of open-source code intelligence », GitHub, 2024. [En ligne]. Disponible sur : https://github.com/deepseek-ai/DeepSeek-Coder-V2. (Modèle spécialisé 1B retenu pour l'inférence instantanée inline).
+### Concepts théoriques et tutoriels système
+[16] Anthropic, « Model Context Protocol », Anthropic News, 2024. [En ligne]. Disponible sur : https://www.anthropic.com/news/model-context-protocol. (Utilisé pour l'étude du standard ouvert d'interopérabilité des agents locaux).
+[17] S. Sharma, « Le guide ultime pour comprendre les MCP (+3 demos) », YouTube, 2024. [En ligne]. Disponible sur : https://www.youtube.com/watch?v=9RV5gttT6rA. (Analysé pour les cas pratiques d'intégration et d'automatisation système).
+[18] IBM Technology, « Is RAG Still Needed? Choosing the Best Approach for LLMs », YouTube, 2024. [En ligne]. Disponible sur : https://www.youtube.com/watch?v=UabBYexBD4k. (Consulté pour la validation des architectures RAG face au fine-tuning sur le traitement de documents privés).
+[19] Underscore_, « On reçoit Arthur Mensch, PDG de Mistral AI », YouTube, 2024. [En ligne]. Disponible sur : https://www.youtube.com/watch?v=bzs0wFP_6ck. (Étudié pour la veille stratégique sur l'optimisation des petits modèles ouverts).
+Alternatives écartées (Veille comparée)
+
+### Alternatives écartées (Veille comparée)
+[20] vLLM Team, « vLLM: A high-throughput and memory-efficient LLM serving engine », GitHub, 2025. [En ligne]. Disponible sur : https://github.com/vllm-project/vllm. (Écarté : architecture trop lourde, optimisée pour la production scale-up).
+[21] LocalAI Project, « LocalAI: The free, Open Source OpenAI alternative », LocalAI Documentation, 2024. [En ligne]. Disponible sur : https://localai.io/. (Écarté : alternative délaissée au profit d'Ollama pour la simplicité de gestion via Modelfiles).
+[22] Wikipédia, « Fine-tuning (deep learning) », Wikipedia, The Free Encyclopedia, 2025. [En ligne]. Disponible sur : https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning). (Écarté : processus figé et matériellement inaccessible avec les 8 Go de VRAM de ma RTX 4060).
+[23] T. Dero, « ExLlamaV2: An optimized inference engine for LLaMA models », GitHub, 2024. [En ligne]. Disponible sur : https://github.com/turboderp/exllamav2. (Écarté : requiert des configurations de dépendances trop strictes sous Linux par rapport à l'agilité d'Ollama).
+[24] Oobabooga, « Text-Generation-WebUI », GitHub, 2025. [En ligne]. Disponible sur : https://github.com/oobabooga/text-generation-webui. (Écarté : interface basée sur Gradio, jugée trop lourde, complexe à automatiser proprement via Docker).
+[25] LibreChat Team, « LibreChat: Every AI Model in One App », LibreChat Docs, 2025. [En ligne]. Disponible sur : https://www.librechat.ai/. (Écarté : excellente interface utilisateur mais configuration multi-services trop lourde pour un PoC agile).
+
+### Outils de soutien à la rédaction et à la mise en forme
+[26] Google, « Large Language Model Gemini », Outil d'aide à la réflexion et à la structuration de contenu, 2026. (Utilisé pour la mise en forme et l'organisation du plan provisoire et de la médiagraphie IEEE ainsi que pour l'assistance à l'automatisation de mon déploiement).
+[27] MyBib, « IEEE Citation Generator », MyBib Tools, 2026. [En ligne]. Disponible sur : https://www.mybib.com/tools/ieee-citation-generator. (Utilisé pour le formatage automatique des références bibliographiques à la norme standard).
