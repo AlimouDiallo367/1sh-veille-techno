@@ -101,3 +101,7 @@ J'ai mis en place un conteneur nginx et configuré les certificats ssl. Malheure
 
 ## Référence
 Voir la procédure de déploiement ici [AiBarr](https://github.com/AlimouDiallo367/aibarr/blob/main/docs/deployment_proc.md)
+
+## Annexes
+* Consulter la [Proposition Formelle et Devis](./assets/devis_formalisation.md)
+* Télécharger le [Schéma de la Mindmap (PDF)](./assets/aibarr_mindmap.pdf)
