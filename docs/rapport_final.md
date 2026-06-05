@@ -1,7 +1,7 @@
 # AiBarr - Rapport  
 
 **Cours** : Veille technologique (420-1SH-SW)  
-**Date de remise** : 22 avril 2026  
+**Date de remise** : 05 mai 2026  
 **Préparé par** : Thierno Alimou Diallo  
 **Présenté à** : Nicolas Bourre 
 
@@ -18,6 +18,9 @@ Le projet repose sur trois approches : le local-first, le no-cloud et le minimal
 Le but recherché est d'obtenir une fluidité et une pertinence de réponse identiques aux outils cloud, mais de manière totalement autonome et gratuite après le téléchargement des modèles. Le minimalisme du projet s'exprime également dans le refus de réinventer la roue en créant une nouvelle interface utilisateur graphique à partir de zéro, ce qui alourdirait inutilement le système. J'ai plutôt choisi d'intégrer *Open WebUI*, un projet existant que je juge très bien fait, fluide et mature. Cela permet de concentrer la totalité des ressources de calcul de la machine sur ce qui importe vraiment : l'inférence brute et la gestion locale des données.
 
 ### 2.2 Architecture (Windows - WSL - Docker) 
+![Architecture globale d'AiBarr](assets/aibarr.png)
+*Figure 1 : Comparaison paradigme dépendant du cloud vs local.*
+
 Pour bâtir ce prototype, la pile technologique a été sélectionnée pour maximiser la productivité et l'efficacité opérationnelle :
 * **L'environnement hôte** : Bien qu'un environnement Linux natif (comme une distribution Fedora en dual-boot) demeure mon choix de coeur pour le développement pur, la réalité du terrain et des contraintes de maintenance nous ont poussés vers une autre stratégie. Redémarrer constamment la machine pour basculer d'un système à l'autre nuit à la productivité quotidienne. Choisir Windows 11 combiné avec Windows Subsystem for Linux (WSL 2) s'est avéré une alternative redoutable d'efficacité. Cette couche nous permet d'exécuter un noyau Linux Ubuntu natif et léger directement à l'intérieur de notre session de travail, sans quitter les outils Windows. C'est ce pont qui permet aux conteneurs Linux d'accéder directement et de manière fluide aux ressources de calcul de la carte graphique (GPU) de la machine hôte via le passthrough matériel.
 * **L'orchestration par micro-services (Docker & Docker Compose)** : Au lieu de tout installer directement sur le système au risque de corrompre l'environnement ou de saturer les dépendances, l'application est découpée en services isolés dans des conteneurs distincts.

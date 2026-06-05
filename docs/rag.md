@@ -29,3 +29,18 @@ Si on devait coder ce pipeline nous-même ("à la dure"), voici ce qu'on ferait,
 - **Le concept :** Il existe une différence d'architecture majeure entre la création d'une base de connaissances réutilisable et le téléversement ponctuel de fichiers au cours d'une discussion.
 - **Injection éphémère (In-Context Stuffing) :** Lorsqu'on glisse-dépose ou téléverse un script de déploiement ou un fichier de configuration directement dans l'invite de commande d'une discussion active (comme sur Gemini, ChatGPT ou un chat vierge d'Open WebUI), le système lit l'intégralité du texte brut et la "colle" directement au début de la mémoire de travail courante. Cette information fait partie de l'historique de ce chat précis et s'efface définitivement dès que la discussion est supprimée. C'est idéal pour un débogage rapide de logs, mais cela sature rapidement la fenêtre de contexte si le fichier est volumineux.
 - **Mode Base de connaissances :** À l'inverse, l'importation de fichiers dans l'onglet "Documents" d'Open WebUI crée une persistance indexée. Le fichier subit le traitement RAG complet : il est découpé, converti en embeddings et stocké de manière permanente dans ChromaDB. Le document complet n'est jamais envoyé tel quel au LLM. À la place, lorsque l'utilisateur pose une question dans n'importe quelle session de chat future, l'interface interroge ChromaDB en tâche de fond pour en extraire chirurgicalement les fragments pertinents. Ce mode permet à l'infrastructure d'absorber des gigaoctets de manuels de serveurs et de politiques réseau sans jamais alourdir la mémoire vive du modèle.
+
+### Visualisation 
+
+<table>
+    <tr>
+        <td style="text-align: center; padding: 10px;">
+            <img src="assets/rag_gemini.png" alt="RAG Open WebUI" />
+            <figcaption>Figure 2 : Principe de fonctionnement du mécanisme RAG et simulation intégration Open WebUI</figcaption>
+        </td>
+        <td style="text-align: center; padding: 10px;">
+            <img src="assets/rag_wikipedia.png" alt="Flux technique détaillé du RAG"/>
+            <figcaption>Figure 3 : Flux technique détaillé traitement des requêtes et RAG</figcaption>
+        </td>
+    </tr>
+</table>
