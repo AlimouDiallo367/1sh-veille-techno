@@ -53,7 +53,7 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 - [x] Essaie avec document personnel vs document cégep?! (documentation onenote vs livre de code?)
 - [x] Choix probable Rust Book, Ruby lang, Github Nicolas (robotique), site web James, Cppreference
 - [x] Bonus, mise en place de Kokoro API  
-- [x] Bonus, mise en place de Opheus-TTS  
+- [x] Bonus, mise en place de Orpheus-TTS  
 - [x] Faire plus de tests avec le RAG pour l'affiner avec Open WebUI 
 
 
@@ -64,7 +64,15 @@ Mise en place de l'environnement système avec l'installation et la configuratio
 ## 5. Intégration environnement NeoVim 
 - [x] CodeCompanion 
 
-## 6. Automatisation déploiement Docker Compose / Bash 
+> *Chronologie : mardi 02 juin.*
+
+## 6. Docker Compose / Bash 
+- [x] Automatisation du déploiement via Docker Compose
+- [ ] Optimisation de la mise en place du setup de base
+
+
+> *Chronologie : mercredi 03 juin (rédaction doc/proc, rag, base de connaissance rust, jh et expérimentation).*
+> *J'ai essayé plusieurs modèle de voix (Text-To-Speech) dont entre autres Orpheus-TTS et Chatbox-TTS* 
 
 ---
 
